@@ -458,7 +458,7 @@ async function enablePushNotifications(){
   if(VAPID_PUBLIC_KEY.startsWith('REPLACE_')){alert('Phone reminders need one-time server setup first. Follow REMINDERS-SETUP.md to configure the VAPID key, Edge Function, and schedule; notifications will not arrive until setup is complete.');return;}
   try{
     const permission=await Notification.requestPermission();if(permission!=='granted'){alert('Notifications were not allowed. You can enable them in your iPhone settings.');return;}
-    const reg=await navigator.serviceWorker.register('./sw.js');
+    await navigator.serviceWorker.register('./sw.js'); const reg=await navigator.serviceWorker.ready;
     const sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array(VAPID_PUBLIC_KEY)});
     const {data:{user}}=await supabaseClient.auth.getUser();if(!user)throw new Error('Please sign in again.');
     const {error}=await supabaseClient.from('planner_push_subscriptions').upsert({endpoint:sub.endpoint,subscription:sub.toJSON(),user_id:user.id,profile_name:activeProfile,updated_at:new Date().toISOString()},{onConflict:'endpoint'});
