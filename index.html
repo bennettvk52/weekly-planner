@@ -450,7 +450,7 @@ window.addEventListener('storage',e=>{
 
 
 // Reminder/push setup. Add the generated VAPID public key here after provisioning the push backend.
-const VAPID_PUBLIC_KEY = 'REPLACE_WITH_VAPID_PUBLIC_KEY';
+const VAPID_PUBLIC_KEY = 'BFA3MVDk7GdUBcWM9SZvnVRzq2pgmfhiSFaTC9fw2w8r7xQnSQjBoe_HarW0pJlcN5ioHFZcGAeGJp0s7F2Stj8';
 window.getActiveProfile = () => activeProfile;
 function urlBase64ToUint8Array(base64String){const padding='='.repeat((4-base64String.length%4)%4);const base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');const raw=atob(base64);return Uint8Array.from([...raw].map(c=>c.charCodeAt(0)));}
 async function enablePushNotifications(){
